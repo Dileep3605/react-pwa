@@ -3,14 +3,17 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import FoodItems from "./pages/FoodItems";
 import "./index.css";
-import React from "react";
+import React, { useEffect } from "react";
 import AppNavbar from "./pages/Navbar";
 import { Button } from "@heroui/react";
+import { getPushToken, listenToForegroundMessages } from "./firebase";
+import { MessagePayload } from "firebase/messaging";
+
+const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY; // From Firebase console
 
 function App() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-
   const handleLogout = () => {
     setIsLoggedIn(false);
     navigate("/login");
@@ -20,6 +23,21 @@ function App() {
   const toggleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
   };
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const fcmToken = await getPushToken(vapidKey);
+      if (fcmToken) {
+        console.log("Push token:", fcmToken);
+      }
+    };
+
+    fetchToken();
+    listenToForegroundMessages((payload: MessagePayload) => {
+      console.log(payload.notification?.body || "New message received");
+    });
+  }, []);
+
   return (
     <>
       {/* Header */}
