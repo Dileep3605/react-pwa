@@ -4,10 +4,12 @@ import Profile from "./pages/Profile";
 import FoodItems from "./pages/FoodItems";
 import "./index.css";
 import React, { useEffect } from "react";
-import AppNavbar from "./pages/Navbar";
+import AppNavbar from "./components/Navbar";
 import { Button } from "@heroui/react";
 import { getPushToken, listenToForegroundMessages } from "./firebase";
 import { MessagePayload } from "firebase/messaging";
+import NearBy from "./pages/NearBy";
+import Restaurants from "./pages/Restaurants";
 
 const vapidKey = import.meta.env.VITE_FIREBASE_VAPID_KEY; // From Firebase console
 
@@ -59,6 +61,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/foods" element={<FoodItems />} />
+          <Route path="/nearby" element={<NearBy />} />
+          <Route path="/restaurants" element={<Restaurants />} />
         </Routes>
       </main>
     </>

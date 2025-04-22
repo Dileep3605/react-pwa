@@ -40,13 +40,13 @@ export default function AppNavbar({ isLoggedIn, onLogout }: NavbarProps) {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/restaurants">
             <Icon icon="lucide:utensils" className="mr-2" />
             Restaurants
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" href="/nearby">
             <Icon icon="lucide:map-pin" className="mr-2" />
             Near Me
           </Link>
